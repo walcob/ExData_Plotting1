@@ -7,7 +7,8 @@ getData <- function(){
     drop <- c("Date","Time")
     ## Create new column containing both the date and the time together
     dateTime <- paste(data$Date,data$Time)
-    data$Date.Time <- strptime(dateTime,format="%d/%m/%Y %T",tz="UTC")
+    ## Suppress warnings about timezones...
+    data$Date.Time <- suppressWarnings(strptime(dateTime,format="%d/%m/%Y %T",tz="UTC"))
     ## Remove the Date and Time columns
     data <- data[,!(names(data) %in% drop)]
     
